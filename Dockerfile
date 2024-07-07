@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CDM ["python", "./chatbot.py"]
+CMD ["python", "./chatbot.py"]
