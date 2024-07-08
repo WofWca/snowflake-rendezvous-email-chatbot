@@ -7,4 +7,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["python", "./chatbot.py"]
+ENTRYPOINT ["python", "./chatbot.py"]
+CMD ["serve"]
