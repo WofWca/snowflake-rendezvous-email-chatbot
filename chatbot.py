@@ -12,32 +12,38 @@ cli = BotCli("chatbot")
 @cli.on(events.NewMessage)
 def get_answer(bot, accid, event):
     msg = event.msg
-    encodedString = msg.text
     try:
-        requestBody = base64ToString(encodedString)
+        try:
+            requestBody = base64ToString(msg.text)
+        except Exception:
+            requestBody = msg.text
+
         response = get_response(requestBody)
-        encodedResponse = stringToBase64(response)
-        bot.rpc.send_msg(accid, msg.chat_id, MsgData(text=encodedResponse))
+
+    except InvalidDataException:
+        response = "ERROR: " + "\n" + "Invalid data"
     except Exception as err:
         print(err)
         response = "ERROR: " + "\n" + str(err)
-        bot.rpc.send_msg(accid,
-                         msg.chat_id,
-                         MsgData(text=response))
+
+    bot.rpc.send_msg(accid, msg.chat_id, MsgData(text=response))
 
 
 def get_response(requestBody):
     server = "https://snowflake-broker.torproject.net/client"
     response = requests.post(server, data=requestBody)
+    status = response.status_code
+    if status != 200:
+        raise InvalidDataException
     return response.text
 
 
-def stringToBase64(s):
-    return (base64.b64encode(s.encode('utf-8'))).decode('utf-8')
-
-
 def base64ToString(b):
-    return base64.b64decode(b).decode('utf-8')
+    return base64.b64decode(b).decode("utf-8")
+
+
+class InvalidDataException(Exception):
+    """Invalid data"""
 
 
 if __name__ == "__main__":
