@@ -1,6 +1,37 @@
 # snowflake-rendezvous-email-chatbot
 
-Email chatbot for the snowflake project that helps conneting the proxy and the client through webRTC by forwarding the offer and answer between the broker server and the client.
+Email chatbot for [Snowflake](https://snowflake.torproject.org/) rendezvous.
+
+This is just a proof-of-concept project and it is not currently useful.  
+Snowflake client does not currently implement
+automatic email rendezvous,
+nor does it implement a generic way to print the offer to the user
+and receive the answer from them (see
+[this comment](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/issues/25594#note_2823395)
+and
+[this commit](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/commit/622005c79ed2e9f444d75dba90b3ee52fdc82a37)
+).
+
+Basically it is a [WebRTC signaling](https://webrtcforthecurious.com/docs/02-signaling/)
+server.
+A client sends its WebRTC offer by email to request a proxy,
+to which this bot will respond with a proxy's WebRTC answer
+that it gets from
+[the original Snowflake broker](https://snowflake-broker.torproject.net/).
+
+Currently Snowflake uses
+[other rendezvous methods](https://www.bamsoftware.com/papers/snowflake/#rendezvous)
+in production.
+This bot implements an alternative rendezvous method as described in
+[the Snowflake paper](https://www.bamsoftware.com/papers/snowflake/#n-16).
+
+For historical reference, rendezvous through email is nothing new.
+[It was employed by Flash proxy](https://www.bamsoftware.com/papers/snowflake/#n-16),
+which is another (now deprecated) censorship circumvention network
+similar to Snowflake, which Snowflake was inspired by.
+The Flash proxy's email rendezvous code is much more fleshed-out
+than this project (e.g. emails are always encrypted there),
+so, for future development it's worth examining their code.
 
 ## How to use
 
@@ -111,3 +142,12 @@ sequenceDiagram
     deactivate Proxy
     deactivate User
 ```
+
+## Why
+
+(in my understanding)
+Email remains on of the most censorship-resistant channels,
+due to low censorship circumvention utility for users
+(compared to, let's say, VPNs),
+and therefore low interests of censors in blocking it.
+Also it's high-collateral as it is used by nearly everyone.
