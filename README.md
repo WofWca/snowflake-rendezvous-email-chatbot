@@ -106,6 +106,12 @@ so, for future development it's worth examining their code.
 
 The email provider might mess up the formatting of the email. In that case, try [a base64-encoded one](mailto:snowflake.rendezvous.chatbot@gmail.com?body=MS4wCnsib2ZmZXIiOiJ7XCJzZHBcIjpcInY9MFxcclxcbm89LSAxMjM0NTY3ODkgOTg3NjU0MzIxIElOIElQNCAwLjAuMC4wXFxyXFxucz0tXFxyXFxudD0wIDBcXHJcXG5hPWZpbmdlcnByaW50OnNoYS0yNTYgMTI6MzRcXHJcXG5hPWV4dG1hcC1hbGxvdy1taXhlZFxcclxcbmE9Z3JvdXA6QlVORExFIDBcXHJcXG5tPWFwcGxpY2F0aW9uIDkgVURQL0RUTFMvU0NUUCB3ZWJydGMtZGF0YWNoYW5uZWxcXHJcXG5jPUlOIElQNCAwLjAuMC4wXFxyXFxuYT1zZXR1cDphY3RwYXNzXFxyXFxuYT1taWQ6MFxcclxcbmE9c2VuZHJlY3ZcXHJcXG5hPXNjdHAtcG9ydDo1MDAwXFxyXFxuYT1pY2UtdWZyYWc6Q29WRWFpRlhSR1Z6c2hYR1xcclxcbmE9aWNlLXB3ZDphT3JPWlhyYVRmRkt6eWVCeElYWVlLalNnUlZQR2hVeFxcclxcbmE9Y2FuZGlkYXRlOjEwMDAgMSB1ZHAgMjAwMCA4LjguOC44IDMwMDAgdHlwIGhvc3RcXHJcXG5hPWVuZC1vZi1jYW5kaWRhdGVzXFxyXFxuXCIsXCJ0eXBlXCI6XCJvZmZlclwifSIsIm5hdCI6InVucmVzdHJpY3RlZCIsImZpbmdlcnByaW50IjoiMkIyODBCMjNFMTEwN0JCNjJBQkZDNDBERENDODgyNDgxNEY4MEE3MiJ9).
 
+You might have to try a few times to get an actual answer.
+
+The above links use a dummy offer that can still work to get an answer.
+If you want to make a real offer and actually connect to a Snowflake proxy,
+go [here](https://wofwca.github.io/snowflake-rendezvous-email-chatbot/test-connection-page).
+
 Another instance is available at <mailto:snowflake@nine.testrun.org>,
 but it can only send encrypted emails.
 You can use it with [Delta Chat messenger](https://delta.chat/).

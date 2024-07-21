@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Snowflake P2P connection</title>
+    <script src="./testP2PConnection.js"></script>
+    <script>
+        (async () => {
+            const {
+                snowflakeClientOffer,
+                connectToProxy,
+            } = await initConnection()
+
+            document.getElementById("offer").innerText = snowflakeClientOffer;
+            document.getElementById("copy-offer-button").style.display = "";
+            document.getElementById("copy-offer-button").onclick = () => {
+                navigator.clipboard.writeText(snowflakeClientOffer)
+            };
+            document.getElementById("answer-section").style.display = "";
+            document.getElementById("answer-form").onsubmit = (ev) => {
+                ev.preventDefault();
+                document.getElementById("answer-section").style.display = "none";
+
+                document.getElementById("connection-state").innerText = "";
+
+                connectToProxy(
+                    document.getElementById("answer").value,
+                    (newConnectionState) => {
+                        const newString = newConnectionState === "connected"
+                            ? (
+                                newConnectionState +
+                                "! Congratulations! You just connected to a Snowflake proxy!"
+                            ) : newConnectionState
+                        document.getElementById("connection-state").innerText +=
+                            '\n' + newString
+                    }
+                )
+            }
+        })()
+    </script>
+</head>
+
+<body>
+    <p>See
+        <a
+            href="https://github.com/WofWca/snowflake-rendezvous-email-chatbot"
+        >https://github.com/WofWca/snowflake-rendezvous-email-chatbot</a>
+    </p>
+    <section id="offer-section"></section>
+        <h2>Offer</h2>
+        <p id="offer">Generating offer...</p>
+        <p>Copy the offer and send it to the Snowflake broker</p>
+        <button id="copy-offer-button" type="button" style="display: none;">Copy</button>
+        <p>Keep in mind that the offer contains your IP address</p>
+    </section>
+    <section id="answer-section" style="display: none;">
+        <h2>Answer</h2>
+        <form id="answer-form">
+            <label for="answer">
+                Paste the answer (not the offer from above!) here:
+            </label><br>
+            <textarea id="answer"></textarea>
+            <input type="submit" />
+        </form>
+    </section>
+    <section>
+        <h2>Connection state</h2>
+        <output id="connection-state">Waiting for you to provide proxy answer</output>
+    </section>
+</body>
+
+</html>
