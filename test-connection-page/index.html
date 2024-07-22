@@ -17,6 +17,12 @@
             document.getElementById("copy-offer-button").onclick = () => {
                 navigator.clipboard.writeText(snowflakeClientOffer)
             };
+
+            document.getElementById("offer-link").style.display = "";
+            document.getElementById("offer-link").href = 
+                "mailto:snowflake.rendezvous.chatbot@gmail.com?body=" +
+                encodeURIComponent(snowflakeClientOffer);
+
             document.getElementById("answer-section").style.display = "";
             document.getElementById("answer-form").onsubmit = (ev) => {
                 ev.preventDefault();
@@ -50,7 +56,13 @@
     <section id="offer-section"></section>
         <h2>Offer</h2>
         <p id="offer">Generating offer...</p>
-        <p>Copy the offer and send it to the Snowflake broker</p>
+
+        <a
+            id="offer-link"
+            style="display: none;"
+        >Send email</a>
+
+        <br><span>Or copy the offer and send it manually</span>
         <button id="copy-offer-button" type="button" style="display: none;">Copy</button>
         <p>Keep in mind that the offer contains your IP address</p>
     </section>
